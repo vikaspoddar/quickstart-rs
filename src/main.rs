@@ -25,6 +25,12 @@ trait Legal {
     fn is_legal_age(&self) -> bool;
 }
 
+trait Signed {
+    fn is_negative(&self) -> bool;
+}
+
+
+
 struct Point<T> {
     x: T,
     y: T,
@@ -39,6 +45,21 @@ struct Number {
     value: i32,
 }
 
+impl Signed for Number {
+    fn is_negative(&self) -> bool {
+        self.value < 0
+    }
+}
+
+impl std::ops::Neg for Number {
+    type Output = Self;
+    fn neg(self) -> Self {
+        Self {
+            value: -self.value,
+            odd: self.odd,
+        }
+    }
+}
 fn main() {
     //half hour of rust
     //variable binding: let introduce variable bindings
@@ -141,7 +162,18 @@ fn main() {
 
     // Struct --- Impl --- Traits
     // orphan rule
-    // 
+    // one of your traits on anyone’s type
+    // anyone’s trait on one of your types
+    // but not a foreign trait on a foreign type
+    
+    // foreign type are those type which originates outside the rust-ecosystem 
+    // accessed via FFI (foreign function interface)
+    // wrapped in rust-type allowing safe interaction
+    
+    // Self type: impl block is always for a type 
+    
+    
+    // marker traits: certain method are called on a type, not type implements certain methods
 }
 
 fn get_number_detail_if_let(n: Number) {
