@@ -39,7 +39,7 @@ struct Point<T> {
 
 // structs are init by struct literals
 
-
+#[derive(Clone, Copy)]
 struct Number {
     odd: bool,
     value: i32,
@@ -60,6 +60,7 @@ impl std::ops::Neg for Number {
         }
     }
 }
+
 fn main() {
     //half hour of rust
     //variable binding: let introduce variable bindings
@@ -146,7 +147,7 @@ fn main() {
     let two = Number{odd: false, value: 2};
     print_match(one);
     print_match(two);
-
+    let _name = "Peter";
     // exhaustive matches
     // "catch-all" pattern
 
@@ -174,6 +175,14 @@ fn main() {
     
     
     // marker traits: certain method are called on a type, not type implements certain methods
+    // deriving traits: some common traits can be implemented automatically used derive attribute
+    // generics: function can be generic
+    // foobar(&val);
+    // foobar(&val);
+}
+
+fn foobar<T>(_arg: T){
+    todo!("It will get implemented")
 }
 
 fn get_number_detail_if_let(n: Number) {
