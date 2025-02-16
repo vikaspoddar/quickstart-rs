@@ -1,19 +1,22 @@
+#![crate_name = "quickstart_rs"]
 #![allow(dead_code)]
 
+mod collection;
 use std::cmp::max;
 
-
 //structs
+/// A human being is represented here
 struct Person {
+    /// A Person must have a name and age
     name: String,
     age: u8,
 }
+
 impl Person {
     fn age(&self) -> u8 {
         self.age
     }
 }
-
 impl Legal for Person {
     fn is_legal_age(&self) -> bool {
         println!("Is legal age...");
@@ -29,13 +32,10 @@ trait Signed {
     fn is_negative(&self) -> bool;
 }
 
-
-
 struct Point<T> {
     x: T,
     y: T,
 }
-
 
 // structs are init by struct literals
 
@@ -116,7 +116,11 @@ fn main() {
     let vikas = get_person();
     println!("{}", vikas.name);
     let long_word = "Hippopotamus";
-    println!("The length of the word '{}': {}", long_word, long_word.len());
+    println!(
+        "The length of the word '{}': {}",
+        long_word,
+        long_word.len()
+    );
     // modules and namespace scoping
     let least = std::cmp::min(10, 45);
     println!("The smallest number is {}", least);
@@ -127,34 +131,51 @@ fn main() {
     let _length = "vikas".len();
     let _length = str::len("vikas");
     // struct initialized using struct literal
-    let person1 = Person{name: "Happy".to_owned(), age: 18};
-    let person2 = Person{name: "Amar".to_owned(), age: 30};
+    let person1 = Person {
+        name: "Happy".to_owned(),
+        age: 18,
+    };
+    let person2 = Person {
+        name: "Amar".to_owned(),
+        age: 30,
+    };
     // destructing structs
-    let Person {name, age} = person1;
+    let Person { name, age } = person1;
     println!("{} {}", name, age);
     println!("{}", person2.age());
     println!("{}", person2.is_legal_age());
     // primitive types and some non-primitive types are scoped by default
 
     // patterns and destructuring - if let
-    let one = Number{odd: true, value: 1};
-    let two = Number{odd: false, value: 2};
-    let _three = Number{odd: true, ..two};
-    let _two = Number{..two};
+    let one = Number {
+        odd: true,
+        value: 1,
+    };
+    let two = Number {
+        odd: false,
+        value: 2,
+    };
+    let _three = Number { odd: true, ..two };
+    let _two = Number { ..two };
     get_number_detail_if_let(one);
     get_number_detail_if_let(two);
-    let one = Number{odd: true, value: 1};
-    let two = Number{odd: false, value: 2};
+    let one = Number {
+        odd: true,
+        value: 1,
+    };
+    let two = Number {
+        odd: false,
+        value: 2,
+    };
     print_match(one);
     print_match(two);
     let _name = "Peter";
     // exhaustive matches
     // "catch-all" pattern
 
-
     // immutability
-    // variable binding are immutable by default: means their interior can't be mutated or resigned 
-    // making variable mutable 
+    // variable binding are immutable by default: means their interior can't be mutated or resigned
+    // making variable mutable
     let mut val = Number {
         odd: true,
         value: 17,
@@ -166,14 +187,13 @@ fn main() {
     // one of your traits on anyone’s type
     // anyone’s trait on one of your types
     // but not a foreign trait on a foreign type
-    
-    // foreign type are those type which originates outside the rust-ecosystem 
+
+    // foreign type are those type which originates outside the rust-ecosystem
     // accessed via FFI (foreign function interface)
     // wrapped in rust-type allowing safe interaction
-    
-    // Self type: impl block is always for a type 
-    
-    
+
+    // Self type: impl block is always for a type
+
     // marker traits: certain method are called on a type, not type implements certain methods
     // deriving traits: some common traits can be implemented automatically used derive attribute
     // generics: function can be generic
@@ -182,16 +202,17 @@ fn main() {
     let first_name: String = String::from("Peter");
     let reference_name: &String = &first_name;
     println!("{}", reference_name);
+    collection::vector_demo();
 }
 
-fn foobar<T>(_arg: T){
+fn foobar<T>(_arg: T) {
     todo!("It will get implemented")
 }
 
 fn get_number_detail_if_let(n: Number) {
-    if let Number{odd: true, value} = n {
+    if let Number { odd: true, value } = n {
         println!("Odd number: {}", value);
-    }else if let Number{odd: false, value} = n {
+    } else if let Number { odd: false, value } = n {
         println!("Even number: {}", value);
     }
 }
@@ -199,8 +220,8 @@ fn get_number_detail_if_let(n: Number) {
 fn print_match(n: Number) {
     //match arm pattern
     match n {
-        Number{odd: true, value} => println!("Odd: {}", value),
-        Number{odd: false, value} => println!("Even: {}", value),
+        Number { odd: true, value } => println!("Odd: {}", value),
+        Number { odd: false, value } => println!("Even: {}", value),
     }
 }
 
