@@ -179,6 +179,9 @@ fn main() {
     // generics: function can be generic
     // foobar(&val);
     // foobar(&val);
+    let first_name: String = String::from("Peter");
+    let reference_name: &String = &first_name;
+    println!("{}", reference_name);
 }
 
 fn foobar<T>(_arg: T){
