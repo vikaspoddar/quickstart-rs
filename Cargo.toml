@@ -2,5 +2,7 @@
 name = "quickstart-rs"
 version = "0.1.0"
 edition = "2021"
-
+authors = ["Vikas Poddar"]
+description = "This is a package for learning about rust programming language"
+repository = "github.com/vikaspoddar/quickstart-rs"
 [dependencies]
