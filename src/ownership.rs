@@ -1,4 +1,4 @@
-/// This module demonstrates ownership and borrowing 
+/// This module demonstrates ownership and borrowing
 
 /// Immutable string demo function
 /// * ownership

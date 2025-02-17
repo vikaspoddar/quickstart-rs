@@ -7,3 +7,4 @@ description = "This is a package for learning about rust programming language"
 repository = "https://github.com/vikaspoddar/quickstart-rs"
 license = "MIT"
 [dependencies]
+quick-lib = "0.1.23"

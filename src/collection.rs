@@ -1,4 +1,4 @@
-/// This the demo for some common collection in rust 
+/// This the demo for some common collection in rust
 pub fn vector_demo() {
     let vector1 = [1, 2, 3];
     println!("{:?}", vector1);

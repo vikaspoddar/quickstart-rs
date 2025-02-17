@@ -6,6 +6,8 @@ mod ownership;
 
 use collection::vector_demo;
 use ownership::ownership_demo;
+use quick_lib::person::Person as quick_lib_person;
+use quick_lib::{indirect_access, person};
 use std::cmp::max;
 
 //structs
@@ -95,7 +97,7 @@ fn main() {
     let x = 5;
     let y = 3;
     let _z = x + y;
-    let x = vec![1, 2, 3, 4, 5, 6, 7, 8]
+    let x = [1, 2, 3, 4, 5, 6, 7, 8]
         .iter()
         .map(|x| x + 3)
         .fold(0, |x, y| x + y);
@@ -208,10 +210,18 @@ fn main() {
     println!("{}", reference_name);
     vector_demo();
     ownership_demo();
+    indirect_access();
+    external_person();
 }
 
 fn foobar<T>(_arg: T) {
     todo!("It will get implemented")
+}
+
+fn external_person() {
+    let person: quick_lib_person =
+        quick_lib_person::new("Vikas Poddar".to_owned(), 24, person::Gender::Male);
+    println!("Hello, Mr. {}", person.get_name());
 }
 
 fn get_number_detail_if_let(n: Number) {
@@ -235,8 +245,7 @@ fn print_match(n: Number) {
 fn get_person() -> Person {
     let name = String::from("Vikas");
     let age = 24;
-    let person = Person { name, age };
-    person
+    Person { name, age }
 }
 
 fn greet() {

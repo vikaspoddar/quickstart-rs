@@ -3,5 +3,14 @@
 version = 4
 
 [[package]]
+name = "quick-lib"
+version = "0.1.23"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6186075780a2c89785af43fb44e5da3a3f2e1990ede7d04b72735d7d29140d47"
+
+[[package]]
 name = "quickstart-rs"
 version = "0.1.0"
+dependencies = [
+ "quick-lib",
+]
