@@ -2,7 +2,10 @@
 #![allow(dead_code)]
 
 mod collection;
+mod ownership;
+
 use collection::vector_demo;
+use ownership::ownership_demo;
 use std::cmp::max;
 
 //structs
@@ -204,6 +207,7 @@ fn main() {
     let reference_name: &String = &first_name;
     println!("{}", reference_name);
     vector_demo();
+    ownership_demo();
 }
 
 fn foobar<T>(_arg: T) {
