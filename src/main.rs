@@ -2,6 +2,7 @@
 #![allow(dead_code)]
 
 mod collection;
+use collection::vector_demo;
 use std::cmp::max;
 
 //structs
@@ -202,7 +203,7 @@ fn main() {
     let first_name: String = String::from("Peter");
     let reference_name: &String = &first_name;
     println!("{}", reference_name);
-    collection::vector_demo();
+    vector_demo();
 }
 
 fn foobar<T>(_arg: T) {
