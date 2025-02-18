@@ -3,12 +3,14 @@
 
 mod collection;
 mod ownership;
+mod iterator;
 
 use collection::vector_demo;
 use ownership::ownership_demo;
 use quick_lib::person::Person as quick_lib_person;
 use quick_lib::{indirect_access, person};
 use std::cmp::max;
+use iterator::iterator_demo;
 
 //structs
 /// A human being is represented here
@@ -212,6 +214,7 @@ fn main() {
     ownership_demo();
     indirect_access();
     external_person();
+    iterator_demo();
 }
 
 fn foobar<T>(_arg: T) {
