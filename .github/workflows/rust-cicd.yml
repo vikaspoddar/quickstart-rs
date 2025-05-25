@@ -1,0 +1,83 @@
+name: Rust CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          
+      - name: Run tests
+        run: cargo test --verbose
+        
+  build-debug:
+    name: Debug Build
+    needs: test
+    runs-on: ubuntu-latest
+    # environment: development
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          
+      - name: Build Debug
+        run: cargo build --verbose
+        
+      - name: Upload Debug Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-build
+          path: target/debug/quickstart-rs
+          
+  build-release:
+    name: Release Build
+    needs: test
+    runs-on: ubuntu-latest
+    # environment: production
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          
+      - name: Build Release
+        run: cargo build --release --verbose
+        
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-build
+          path: target/release/quickstart-rs
+          
+      - name: Create Release
+        if: github.ref == 'refs/heads/main' # Only create release from main branch
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/release/quickstart-rs
+          name: Release ${{ github.sha }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
